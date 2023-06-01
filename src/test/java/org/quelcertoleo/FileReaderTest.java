@@ -7,8 +7,17 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class FileReaderTest {
+
+    @Test
+    void should_throw_exception_on_non_existing_file() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                FileReader.getNamesFromFile("I_Do_Not_Exist.txt"));
+
+        assertEquals("File does not exist", exception.getMessage());
+    }
 
     @Test
     void should_read_italian_names_file() throws IOException, URISyntaxException {
